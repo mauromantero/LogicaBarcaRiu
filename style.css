@@ -1,0 +1,59 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #f0f8ff;
+    padding: 20px;
+}
+
+#regles {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-align: left;
+}
+
+#escenari {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.riba {
+    width: 30%;
+    min-height: 200px;
+    background-color: #d2b48c; /* Color terra */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#zona-barca {
+    width: 30%;
+    min-height: 150px;
+    background-color: #87ceeb; /* Color aigua */
+    border-radius: 10px;
+    padding: 10px;
+}
+
+button {
+    margin: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #eee;
+}
+
+#panell-missatges {
+    margin-top: 30px;
+    padding: 15px;
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+}

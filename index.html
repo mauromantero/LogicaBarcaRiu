@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Repte Lògic: Travessia del Riu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>La Travessia del Riu</h1>
+
+<div id="regles">
+  <h3>📜 Regles del Joc</h3>
+  <ul>
+    <li>Màxim 2 persones a la barca.</li>
+</div>
+
+<div id="escenari">
+  <div id="costat1" class="riba">
+    <h3>Riba Esquerra</h3>
+    <div id="personatges-c1"></div>
+  </div>
+
+  <div id="zona-barca">
+    <h3>Barca 🛶</h3>
+    <div id="barca-display"></div>
+    <button id="btn-creuar">CREUAR ➔</button>
+  </div>
+
+  <div id="costat2" class="riba">
+    <h3>Riba Dreta</h3>
+    <div id="personatges-c2"></div>
+  </div>
+</div>
+
+<div id="panell-missatges">
+  <strong>Sistema:</strong> <span id="missatge">Benvingut al joc. Fes clic a un personatge per moure'l.</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
