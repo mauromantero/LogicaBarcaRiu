@@ -3,7 +3,8 @@ const costat1 = ["malote" , "policia", "madre", "padre", "hijo1", "hijo2", "hija
 const barca = [];
 const costat2 = [];
 
-const cuerpo = document.getElementById('body')
+const foxy = document.getElementById('foxy');
+const adios = document.getElementsByClassName("desaparecer")
 const contenidorC1 = document.getElementById("personatges-c1");
 const missatgeDisplay = document.getElementById("missatge");
 const contenidorB = document.getElementById("barca-display");
@@ -19,6 +20,14 @@ function actualitzarInterficie() {
     costat1.forEach(element => {
         const boto = document.createElement("button");
         boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
+        if (voy_a_vox) {
+
+            voy_a_vox = false
+            contenidorC1.disabled = false
+        }else{
+            voy_a_vox = true
+            contenidorC1.disabled = true
+        }
 
         boto.addEventListener("click", () => {
             // Exemple de lògica: passar del costat 1 a la barca
@@ -48,6 +57,7 @@ function barco_añadir(element){
             costat1.splice(index, 1);
             console.log('Has pulsado', alguna_variable);
             barca.push(alguna_variable);
+            comprobar_cosas(alguna_variable)
 
         }else{
             index = costat2.indexOf(element);
@@ -55,6 +65,7 @@ function barco_añadir(element){
             costat2.splice(index, 1);
             console.log('Has pulsado', alguna_variable);
             barca.push(alguna_variable);
+
         }
 
         console.log('En la barca hay:', barca);
@@ -66,7 +77,12 @@ function barco_añadir(element){
         console.log(num)
         if(num !== 5){
             alert('No puedes máss')
-            cuerpo.innerHTML+= '<img src="/imagenes/foxy.gif" width="1000px" height="1000px" id="susto">'
+            setTimeout(() =>{
+                foxy.style.display = 'block';
+                setTimeout(() =>{
+                    foxy.style.display = 'none';
+                }, 1000)
+            }, 5000)
         }else{
             alert('No puedes más')
         }
@@ -94,20 +110,40 @@ function bajar(element){
 }
 
 function cruzar(){
-    if(voy_a_vox){
+    console.log(barca)
 
-        voy_a_vox= false
-        for(let i=0;i<=barca.length;i++){
-            bajar(barca[0])
+    if(barca.includes('padre') || barca.includes('madre') || barca.includes('policia')) {
+
+        if (voy_a_vox) {
+
+            voy_a_vox = false
+            for (let i = 0; i <= barca.length; i++) {
+                bajar(barca[0])
+            }
+            // boto.disabled = false
+
+        } else {
+
+            voy_a_vox = true
+            for (let i = 0; i <= barca.length; i++) {
+                bajar(barca[0])
+            }
+            // boto.disabled = true;
+
         }
+    }
+    else{
+        console.log('sexo no')
+    }
+}
 
-    }else{
+function comprobar_cosas(personaje){
+    if(personaje === 'policia'){
+    //     Si voy a vox es tru compruebo el lado de en donde esta el ladron en la izq
+        if(voy_a_vox && costat1.includes('malote') == false) {
+        //     mandar traza para q se suba
 
-        voy_a_vox= true
-        for(let i=0;i<=barca.length;i++){
-            bajar(barca[0])
         }
-
     }
 }
 
@@ -115,11 +151,15 @@ function dibujar(){
     contenidorC1.innerHTML = "";
     contenidorB.innerHTML = "";
     contenidorC2.innerHTML = "";
+    console.log(voy_a_vox)
 
     barca.forEach(element => {
         const boto = document.createElement("button");
         boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
 
+        // if(costat1.includes('malote')&&(costat1.length=1)){
+        //
+        // }
         boto.addEventListener("click", () => {
             // Exemple de lògica: passar del costat 1 a la barca
 
@@ -140,6 +180,12 @@ function dibujar(){
         const boto = document.createElement("button");
         boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
 
+        if(voy_a_vox) {
+            boto.disabled = false
+        }else{
+            boto.disabled = true
+        }
+
         boto.addEventListener("click", () => {
             // Exemple de lògica: passar del costat 1 a la barca
 
@@ -158,8 +204,11 @@ function dibujar(){
 
     costat2.forEach(element => {
         const boto = document.createElement("button");
-        boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
+        boto.innerHTML = "<img src=/imagenes/" + element + ".png width='100px' height='100px'>";
 
+        if(voy_a_vox) {
+            boto.disabled = true
+        }
         boto.addEventListener("click", () => {
             // Exemple de lògica: passar del costat 1 a la barca
 
@@ -181,4 +230,3 @@ function dibujar(){
 
 // Inicialitzem la vista
 actualitzarInterficie();
-

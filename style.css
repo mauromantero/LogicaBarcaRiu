@@ -3,9 +3,10 @@ body {
     text-align: center;
     background-color: #f0f8ff;
     padding: 20px;
+    /*background-color: black;*/
 }
 
-#regles {
+.regles {
     background: #fff;
     border: 1px solid #ccc;
     padding: 10px;
@@ -58,6 +59,12 @@ button:hover {
     border-radius: 5px;
 }
 
-susto{
-    z-index: 2;
+
+.miedo{
+    display: none;
+    z-index: 10;
 }
+
+/*.desaparecer{*/
+/*    display:block;*/
+/*}*/
