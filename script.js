@@ -4,7 +4,6 @@ const barca = [];
 const costat2 = [];
 
 const foxy = document.getElementById('foxy');
-const adios = document.getElementsByClassName("desaparecer")
 const contenidorC1 = document.getElementById("personatges-c1");
 const missatgeDisplay = document.getElementById("missatge");
 const contenidorB = document.getElementById("barca-display");
@@ -50,6 +49,7 @@ function barco_añadir(element){
     if(contador < 2) {
         let index = ""
         let alguna_variable= ""
+        console.log(element)
         if(voy_a_vox) {
             index = costat1.indexOf(element);
             console.log('Index:', index)
@@ -57,19 +57,19 @@ function barco_añadir(element){
             costat1.splice(index, 1);
             console.log('Has pulsado', alguna_variable);
             barca.push(alguna_variable);
-            comprobar_cosas(alguna_variable)
-
+            contador++
         }else{
             index = costat2.indexOf(element);
             alguna_variable = costat2[index];
             costat2.splice(index, 1);
             console.log('Has pulsado', alguna_variable);
             barca.push(alguna_variable);
+            contador++
 
         }
 
         console.log('En la barca hay:', barca);
-        contador++
+
         console.log('Contador:', contador)
         dibujar()
     }else{
@@ -112,7 +112,7 @@ function bajar(element){
 function cruzar(){
     console.log(barca)
 
-    if(barca.includes('padre') || barca.includes('madre') || barca.includes('policia')) {
+    if(comprobar_cosas() === true) {
 
         if (voy_a_vox) {
 
@@ -133,17 +133,14 @@ function cruzar(){
         }
     }
     else{
-        console.log('sexo no')
+        console.log('no puede cruzar, insensato')
     }
 }
 
-function comprobar_cosas(personaje){
-    if(personaje === 'policia'){
-    //     Si voy a vox es tru compruebo el lado de en donde esta el ladron en la izq
-        if(voy_a_vox && costat1.includes('malote') == false) {
-        //     mandar traza para q se suba
-
-        }
+function comprobar_cosas() {
+    if (barca.includes('padre') || barca.includes('madre') || barca.includes('policia')) {
+    //     if (voy_a_vox && costat1.includes('malote') == false)
+        return true
     }
 }
 
