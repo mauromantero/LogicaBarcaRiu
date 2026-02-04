@@ -4,6 +4,7 @@ const barca = [];
 const costat2 = [];
 
 const foxy = document.getElementById('foxy');
+const cuerpo = document.getElementById('cuerpo');
 const contenidorC1 = document.getElementById("personatges-c1");
 const missatgeDisplay = document.getElementById("missatge");
 const contenidorB = document.getElementById("barca-display");
@@ -81,6 +82,7 @@ function barco_añadir(element){
                 foxy.style.display = 'block';
                 setTimeout(() =>{
                     foxy.style.display = 'none';
+                    // cuerpo.style.backgroundColor = ;
                 }, 1000)
             }, 5000)
         }else{
@@ -138,9 +140,56 @@ function cruzar(){
 }
 
 function comprobar_cosas() {
+
+    let test_malote = false
+    let test_padre = false
+
     if (barca.includes('padre') || barca.includes('madre') || barca.includes('policia')) {
-    //     if (voy_a_vox && costat1.includes('malote') == false)
-        return true
+    //     Aqui irá la logica 'malote'
+        if (costat1.includes('malote')) {
+            if(costat1.includes('policia')) {
+                test_malote = true
+            }else if(costat1.length === 1){
+                test_malote = true
+            }
+        }else if(costat2.includes('malote')){
+            if(costat2.includes('policia')) {
+                test_malote = true
+            }else if(costat2.length === 1){
+                test_malote = true
+            }
+        }else if(barca.includes('malote')) {
+            if(barca.includes('policia')) {
+                test_malote = true
+            }
+        }
+    //     Aqui irá la logica 'padre' con 'hija1' e 'hija2'
+
+        if(costat1.includes('padre')){
+            if(costat1.includes('hija1') || costat1.includes('hija2')){
+                if(costat1.includes('madre')){
+                    test_padre = true
+                }
+            }
+        }else if(costat2.includes('padre')) {
+            if(costat2.includes('hija1') || costat2.includes('hija2')){
+                if(costat2.includes('madre')){
+                    test_padre = true
+                }
+            }
+        }else if(barca.includes('padre')) {
+            if (barca.includes('hija1') || barca.includes('hija2')) {
+                test_padre = false
+            }else{
+                test_padre = true
+            }
+        }
+
+    //     Comprobar tests
+        if(test_malote && test_padre){
+            return true
+        }
+
     }
 }
 
