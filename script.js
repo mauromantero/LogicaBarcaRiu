@@ -4,14 +4,13 @@ const barca = [];
 const costat2 = [];
 
 const foxy = document.getElementById('foxy');
-const cuerpo = document.getElementById('cuerpo');
 const contenidorC1 = document.getElementById("personatges-c1");
 const missatgeDisplay = document.getElementById("missatge");
 const contenidorB = document.getElementById("barca-display");
 const contenidorC2 = document.getElementById("personatges-c2");
 
 let contador= 0
-let voy_a_vox = true
+let ir_hacia_la_derecha = true
 
 function actualitzarInterficie() {
     // Netejar el contenidor abans de tornar a dibuixar
@@ -20,26 +19,17 @@ function actualitzarInterficie() {
     costat1.forEach(element => {
         const boto = document.createElement("button");
         boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
-        if (voy_a_vox) {
+        if (ir_hacia_la_derecha) {
 
-            voy_a_vox = false
+            ir_hacia_la_derecha = false
             contenidorC1.disabled = false
         }else{
-            voy_a_vox = true
+            ir_hacia_la_derecha = true
             contenidorC1.disabled = true
         }
 
         boto.addEventListener("click", () => {
-            // Exemple de lògica: passar del costat 1 a la barca
-
-
             barco_añadir(element)
-
-            // contenidorB.innerHTML += "<button onclick='barcoquitar()'><img src=/imagenes/"+element+".png width='100px' heigth='100px'></button>";
-
-            // Mostram el missatge del que ha passat.  Recomanat només els errors
-            // missatgeDisplay.textContent = `Has clicat: ${element}.`;
-
         });
 
         contenidorC1.appendChild(boto);
@@ -50,7 +40,7 @@ function barco_añadir(element){
     if(contador < 2) {
         let index = ""
         let alguna_variable= ""
-        if(voy_a_vox) {
+        if(ir_hacia_la_derecha) {
             index = costat1.indexOf(element);
             alguna_variable = costat1[index];
             costat1.splice(index, 1);
@@ -94,7 +84,7 @@ function bajar(element){
     let alguna_variable = barca[index];
     barca.splice(index, 1);
     console.log('Has pulsado', alguna_variable);
-    if(voy_a_vox) {
+    if(ir_hacia_la_derecha) {
         costat1.push(alguna_variable);
         console.log('En la barca hay:', barca);
         contador--
@@ -110,9 +100,9 @@ function cruzar(){
 
     if(comprobar_cosas() === true) {
 
-        if (voy_a_vox) {
+        if (ir_hacia_la_derecha) {
 
-            voy_a_vox = false
+            ir_hacia_la_derecha = false
             for (let i = 0; i <= barca.length; i++) {
                 bajar(barca[0])
             }
@@ -120,11 +110,10 @@ function cruzar(){
 
         } else {
 
-            voy_a_vox = true
+            ir_hacia_la_derecha = true
             for (let i = 0; i <= barca.length; i++) {
                 bajar(barca[0])
             }
-            // boto.disabled = true;
 
         }
     }
@@ -215,22 +204,17 @@ function dibujar(){
     contenidorC1.innerHTML = "";
     contenidorB.innerHTML = "";
     contenidorC2.innerHTML = "";
-    console.log(voy_a_vox)
+    console.log('voy a la derecha:', ir_hacia_la_derecha)
 
     barca.forEach(element => {
         const boto = document.createElement("button");
         boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
 
-        // if(costat1.includes('malote')&&(costat1.length=1)){
-        //
-        // }
         boto.addEventListener("click", () => {
             // Exemple de lògica: passar del costat 1 a la barca
 
 
             bajar(element)
-
-            // contenidorB.innerHTML += "<button onclick='barcoquitar()'><img src=/imagenes/"+element+".png width='100px' heigth='100px'></button>";
 
             // Mostram el missatge del que ha passat.  Recomanat només els errors
             missatgeDisplay.textContent = `Has clicat: ${element}.`;
@@ -244,7 +228,7 @@ function dibujar(){
         const boto = document.createElement("button");
         boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
 
-        if(voy_a_vox) {
+        if(ir_hacia_la_derecha) {
             boto.disabled = false
         }else{
             boto.disabled = true
@@ -255,8 +239,6 @@ function dibujar(){
 
 
             barco_añadir(element)
-
-            // contenidorB.innerHTML += "<button onclick='barcoquitar()'><img src=/imagenes/"+element+".png width='100px' heigth='100px'></button>";
 
             // Mostram el missatge del que ha passat.  Recomanat només els errors
             missatgeDisplay.textContent = `Has clicat: ${element}.`;
@@ -270,7 +252,7 @@ function dibujar(){
         const boto = document.createElement("button");
         boto.innerHTML = "<img src=/imagenes/" + element + ".png width='100px' height='100px'>";
 
-        if(voy_a_vox) {
+        if(ir_hacia_la_derecha) {
             boto.disabled = true
         }
         boto.addEventListener("click", () => {
@@ -278,8 +260,6 @@ function dibujar(){
 
 
             barco_añadir(element)
-
-            // contenidorB.innerHTML += "<button onclick='barcoquitar()'><img src=/imagenes/"+element+".png width='100px' heigth='100px'></button>";
 
             // Mostram el missatge del que ha passat.  Recomanat només els errors
             missatgeDisplay.textContent = `Has clicat: ${element}.`;
