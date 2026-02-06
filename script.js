@@ -1,4 +1,4 @@
-// TODO Enfadar a la consola , Num maximo de intentos , final , reglas , añadir easter egg/dificultad , acabar jumpscare
+// TODO Enfadar a la consola , Num maximo de intentos , final , añadir easter egg/dificultad , acabar jumpscare
 const costat1 = ["malote" , "policia", "madre", "padre", "hijo1", "hijo2", "hija1", "hija2"];
 const barca = [];
 const costat2 = [];
@@ -90,18 +90,27 @@ function bajar(element){
 }
 
 function cruzar(){
+    const boto = document.getElementById("btn-creuar");
 
     if(comprobar_cosas() === true) {
 
         if (ir_hacia_la_derecha) {
 
+            boto.style.alignSelf = "flex-end";
+            boto.innerHTML = "<img src='imagenes/barco_noob_der.png' width='100px'>";
+
             ir_hacia_la_derecha = false
             for (let i = 0; i <= barca.length; i++) {
                 bajar(barca[0])
             }
-            // boto.disabled = false
+            if(costat2.length === 8){
+                ganar()
+            }
 
         } else {
+
+            boto.style.alignSelf = "flex-start";
+            boto.innerHTML = "<img src='imagenes/barco_noob_izq.png' width='100px'>";
 
             ir_hacia_la_derecha = true
             for (let i = 0; i <= barca.length; i++) {
@@ -268,6 +277,16 @@ function dibujar(){
 
         contenidorC2.appendChild(boto);
     });
+}
+
+function ganar(){
+    alert('HAS GANADO')
+
+    let cositas = costat2.splice(0, costat2.length);
+
+    costat1.push(cositas)
+    console.log(costat1)
+
 }
 
 // Inicialitzem la vista
