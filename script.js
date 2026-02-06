@@ -1,4 +1,4 @@
-
+// TODO Enfadar a la consola , Num maximo de intentos , final , reglas , añadir easter egg/dificultad , acabar jumpscare
 const costat1 = ["malote" , "policia", "madre", "padre", "hijo1", "hijo2", "hija1", "hija2"];
 const barca = [];
 const costat2 = [];
@@ -39,31 +39,27 @@ function actualitzarInterficie() {
 function barco_añadir(element){
     if(contador < 2) {
         let index = ""
-        let alguna_variable= ""
+        let personaje_seleccionado= ""
         if(ir_hacia_la_derecha) {
             index = costat1.indexOf(element);
-            alguna_variable = costat1[index];
+            personaje_seleccionado = costat1[index];
             costat1.splice(index, 1);
-            console.log('Has pulsado', alguna_variable);
-            barca.push(alguna_variable);
+            barca.push(personaje_seleccionado);
             contador++
         }else{
             index = costat2.indexOf(element);
-            alguna_variable = costat2[index];
+            personaje_seleccionado = costat2[index];
             costat2.splice(index, 1);
-            console.log('Has pulsado', alguna_variable);
-            barca.push(alguna_variable);
+            barca.push(personaje_seleccionado);
             contador++
 
         }
 
-        console.log('En la barca hay:', barca);
 
         dibujar()
     }else{
         let num= Math.trunc(Math.random() * 10)
-        console.log(num)
-        if(num !== 5){
+        if(num === 2){
             alert('No puedes máss')
             setTimeout(() =>{
                 foxy.style.display = 'block';
@@ -81,16 +77,13 @@ function barco_añadir(element){
 function bajar(element){
     let index = barca.indexOf(element);
 
-    let alguna_variable = barca[index];
+    let personaje_seleccionado = barca[index];
     barca.splice(index, 1);
-    console.log('Has pulsado', alguna_variable);
     if(ir_hacia_la_derecha) {
-        costat1.push(alguna_variable);
-        console.log('En la barca hay:', barca);
+        costat1.push(personaje_seleccionado);
         contador--
     }else{
-        costat2.push(alguna_variable);
-        console.log('En la barca hay:', barca);
+        costat2.push(personaje_seleccionado);
         contador--
     }
     dibujar()
@@ -118,7 +111,7 @@ function cruzar(){
         }
     }
     else{
-        console.log('no puede cruzar')
+        alert('no puede cruzar')
     }
 }
 
@@ -154,12 +147,16 @@ function comprobar_cosas() {
                 if(costat1.includes('madre')){
                     test_padre = true
                 }
+            }else{
+                test_padre = true
             }
         }else if(costat2.includes('padre')) {
             if(costat2.includes('hija1') || costat2.includes('hija2')){
                 if(costat2.includes('madre')){
                     test_padre = true
                 }
+            }else{
+                test_padre = true
             }
         }else if(barca.includes('padre')) {
             if (barca.includes('hija1') || barca.includes('hija2')) {
@@ -176,12 +173,16 @@ function comprobar_cosas() {
                 if(costat1.includes('padre')){
                     test_madre = true
                 }
+            }else{
+                test_madre = true
             }
         }else if(costat2.includes('madre')) {
             if(costat2.includes('hijo1') || costat2.includes('hijo2')){
                 if(costat2.includes('padre')){
                     test_madre = true
                 }
+            }else{
+                test_madre = true
             }
         }else if(barca.includes('madre')) {
             if (barca.includes('hijo1') || barca.includes('hijo2')) {
@@ -204,7 +205,6 @@ function dibujar(){
     contenidorC1.innerHTML = "";
     contenidorB.innerHTML = "";
     contenidorC2.innerHTML = "";
-    console.log('voy a la derecha:', ir_hacia_la_derecha)
 
     barca.forEach(element => {
         const boto = document.createElement("button");
@@ -269,8 +269,6 @@ function dibujar(){
         contenidorC2.appendChild(boto);
     });
 }
-
-
 
 // Inicialitzem la vista
 actualitzarInterficie();
