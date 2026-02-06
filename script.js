@@ -50,10 +50,8 @@ function barco_añadir(element){
     if(contador < 2) {
         let index = ""
         let alguna_variable= ""
-        console.log(element)
         if(voy_a_vox) {
             index = costat1.indexOf(element);
-            console.log('Index:', index)
             alguna_variable = costat1[index];
             costat1.splice(index, 1);
             console.log('Has pulsado', alguna_variable);
@@ -71,7 +69,6 @@ function barco_añadir(element){
 
         console.log('En la barca hay:', barca);
 
-        console.log('Contador:', contador)
         dibujar()
     }else{
         let num= Math.trunc(Math.random() * 10)
@@ -101,18 +98,15 @@ function bajar(element){
         costat1.push(alguna_variable);
         console.log('En la barca hay:', barca);
         contador--
-        console.log('Contador:', contador)
     }else{
         costat2.push(alguna_variable);
         console.log('En la barca hay:', barca);
         contador--
-        console.log('Contador:', contador)
     }
     dibujar()
 }
 
 function cruzar(){
-    console.log(barca)
 
     if(comprobar_cosas() === true) {
 
@@ -135,7 +129,7 @@ function cruzar(){
         }
     }
     else{
-        console.log('no puede cruzar, insensato')
+        console.log('no puede cruzar')
     }
 }
 
@@ -143,6 +137,7 @@ function comprobar_cosas() {
 
     let test_malote = false
     let test_padre = false
+    let test_madre = false
 
     if (barca.includes('padre') || barca.includes('madre') || barca.includes('policia')) {
     //     Aqui irá la logica 'malote'
@@ -185,8 +180,31 @@ function comprobar_cosas() {
             }
         }
 
+    //     Aqui irá la logica 'madre' con 'hijo1' e 'hijo2'
+
+        if(costat1.includes('madre')){
+            if(costat1.includes('hijo1') || costat1.includes('hijo2')){
+                if(costat1.includes('padre')){
+                    test_madre = true
+                }
+            }
+        }else if(costat2.includes('madre')) {
+            if(costat2.includes('hijo1') || costat2.includes('hijo2')){
+                if(costat2.includes('padre')){
+                    test_madre = true
+                }
+            }
+        }else if(barca.includes('madre')) {
+            if (barca.includes('hijo1') || barca.includes('hijo2')) {
+                test_madre = false
+            }else{
+                test_madre = true
+            }
+        }
+
+
     //     Comprobar tests
-        if(test_malote && test_padre){
+        if(test_malote && test_padre && test_madre){
             return true
         }
 
