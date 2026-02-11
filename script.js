@@ -1,13 +1,17 @@
-// TODO Enfadar a la consola , Num maximo de intentos , final , añadir easter egg/dificultad , acabar jumpscare
+// TODO Enfadar a la consola , final , añadir easter egg/dificultad
 const costat1 = ["malote" , "policia", "madre", "padre", "hijo1", "hijo2", "hija1", "hija2"];
 const barca = [];
 const costat2 = [];
 
+const botonreto= document.getElementById('btn-reto')
 const foxy = document.getElementById('foxy');
 const contenidorC1 = document.getElementById("personatges-c1");
-const missatgeDisplay = document.getElementById("missatge");
 const contenidorB = document.getElementById("barca-display");
 const contenidorC2 = document.getElementById("personatges-c2");
+const bebe = document.getElementById("reglanueva");
+const modal = document.getElementById("myModal");
+botonreto.hidden = true;
+let retobebe= true
 
 let contador= 0
 let ir_hacia_la_derecha = true
@@ -103,7 +107,10 @@ function cruzar(){
             for (let i = 0; i <= barca.length; i++) {
                 bajar(barca[0])
             }
-            if(costat2.length === 8){
+            if(costat2.length === 8 && retobebe === false){
+                ganar()
+                botonreto.hidden = false;
+            }else if(costat2.length === 9 && retobebe === true){
                 ganar()
             }
 
@@ -170,6 +177,7 @@ function comprobar_cosas() {
         }else if(barca.includes('padre')) {
             if (barca.includes('hija1') || barca.includes('hija2')) {
                 test_padre = false
+                alert('Están las hijas en la barca')
             }else{
                 test_padre = true
             }
@@ -196,9 +204,14 @@ function comprobar_cosas() {
         }else if(barca.includes('madre')) {
             if (barca.includes('hijo1') || barca.includes('hijo2')) {
                 test_madre = false
+                alert('Están los hijos en la barca')
             }else{
                 test_madre = true
             }
+        }
+
+        if(costat1.includes('bebe')) {
+
         }
 
 
@@ -225,9 +238,6 @@ function dibujar(){
 
             bajar(element)
 
-            // Mostram el missatge del que ha passat.  Recomanat només els errors
-            missatgeDisplay.textContent = `Has clicat: ${element}.`;
-
         });
 
         contenidorB.appendChild(boto);
@@ -249,9 +259,6 @@ function dibujar(){
 
             barco_añadir(element)
 
-            // Mostram el missatge del que ha passat.  Recomanat només els errors
-            missatgeDisplay.textContent = `Has clicat: ${element}.`;
-
         });
 
         contenidorC1.appendChild(boto);
@@ -270,9 +277,6 @@ function dibujar(){
 
             barco_añadir(element)
 
-            // Mostram el missatge del que ha passat.  Recomanat només els errors
-            missatgeDisplay.textContent = `Has clicat: ${element}.`;
-
         });
 
         contenidorC2.appendChild(boto);
@@ -281,13 +285,24 @@ function dibujar(){
 
 function ganar(){
     alert('HAS GANADO')
-
     let cositas = costat2.splice(0, costat2.length);
-
+    botonreto.hidden = true;
     costat1.push(cositas)
     console.log(costat1)
+}
 
+
+function reto(){
+    retobebe = true
+    costat1.push('bebe')
+    botonreto.hidden = true;
+    bebe.innertext = 'El bebé ';
+    dibujar()
 }
 
 // Inicialitzem la vista
 actualitzarInterficie();
+
+function fade(){
+    modal.style.display = "block";
+}

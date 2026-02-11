@@ -24,30 +24,53 @@
     <li>El ladrón no puede estar con los familiares si no está el policia</li>
     <li>El padre no puede estar solo con las hijas sin la madre</li>
     <li>la madre no puede estar sola con los hijos sin el padre</li>
+    <li id="reglanueva">¿?</li>
     </ul>
 </div>
 
 <div id="escenari" class="desaparecer">
-  <div id="costat1" class="riba desaparecer">
+  <div id="costat1" class="riba desaparecer , letras">
     <h3>Riba Esquerra</h3>
     <div id="personatges-c1"></div>
   </div>
 
-  <div id="zona-barca">
+  <div id="zona-barca" class="letras">
     <h3>Barca 🛶</h3>
     <div id="barca-display"></div>
-    <button id="btn-creuar" onclick="cruzar()">
+    <button id="btn-creuar" style="background-color: #4444 ;" onclick="cruzar()">
       <img src='imagenes/barco_noob_izq.png' width='100px'>
     </button>
   </div>
 
-  <div id="costat2" class="riba">
+  <div id="costat2" class="riba , letras">
     <h3>Riba Dreta</h3>
     <div id="personatges-c2"></div>
   </div>
 </div>
-<div id="panell-missatges" class="desaparecer">
-  <strong>Sistema:</strong> <span id="missatge">Benvingut al joc. Fes clic a un personatge per moure'l.</span>
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+    </div>
+    <div class="modal-body">
+      <p>Some text in the Modal Body</p>
+      <p>Some other text...</p>
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+<button onclick="fade()">hola</button>
+<div>
+
+  <button id="btn-reto" onclick='reto()'>Un nuevo reto</button>
+
 </div>
 
 <script src="script.js"></script>
