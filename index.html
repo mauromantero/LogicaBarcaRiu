@@ -16,7 +16,7 @@
 
 <h1 class="desaparecer">La Travessia del Riu</h1>
 
-<div id="regles desaparecer" class="regles">
+<div id="regles" class="regles">
   <h3>📜 Regles del Joc 📜</h3>
   <ul>
     <li>Máximo 2 personas en la barca.</li>
@@ -24,8 +24,7 @@
     <li>El ladrón no puede estar con los familiares si no está el policia</li>
     <li>El padre no puede estar solo con las hijas sin la madre</li>
     <li>la madre no puede estar sola con los hijos sin el padre</li>
-    <li id="reglanueva">¿?</li>
-    </ul>
+  </ul>
 </div>
 
 <div id="escenari" class="desaparecer">
@@ -53,20 +52,19 @@
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Modal Header</h2>
+      <h2>LO HAS LOGRADO</h2>
     </div>
     <div class="modal-body">
-      <p>Some text in the Modal Body</p>
-      <p>Some other text...</p>
+      <p>Pero aún queda añadir...</p>
+      <button onclick="nuevo_reto()">Un nuevo reto</button>
     </div>
     <div class="modal-footer">
-      <h3>Modal Footer</h3>
+      <h3 id="victorias">Victorias</h3>
     </div>
   </div>
 
 </div>
-<button onclick="fade()">hola</button>
+
 <div>
 
   <button id="btn-reto" onclick='reto()'>Un nuevo reto</button>

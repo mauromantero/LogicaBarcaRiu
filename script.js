@@ -3,15 +3,22 @@ const costat1 = ["malote" , "policia", "madre", "padre", "hijo1", "hijo2", "hija
 const barca = [];
 const costat2 = [];
 
+const perros = ['him', 'snoopdog', 'perroemo', 'sideeye', 'perropanzon']
+let perroaleatorio= Math.trunc(Math.random() * 5)
+perro = perros[perroaleatorio]
+
 const botonreto= document.getElementById('btn-reto')
 const foxy = document.getElementById('foxy');
 const contenidorC1 = document.getElementById("personatges-c1");
 const contenidorB = document.getElementById("barca-display");
 const contenidorC2 = document.getElementById("personatges-c2");
-const bebe = document.getElementById("reglanueva");
+const reglas_reto = document.getElementById("regles");
 const modal = document.getElementById("myModal");
+const cantidadvictorias = document.getElementById("victorias");
 botonreto.hidden = true;
-let retobebe= true
+let retoperro= false
+
+let victorias = 0
 
 let contador= 0
 let ir_hacia_la_derecha = true
@@ -107,10 +114,10 @@ function cruzar(){
             for (let i = 0; i <= barca.length; i++) {
                 bajar(barca[0])
             }
-            if(costat2.length === 8 && retobebe === false){
+            if(costat2.length === 8 && retoperro === false){
                 ganar()
                 botonreto.hidden = false;
-            }else if(costat2.length === 9 && retobebe === true){
+            }else if(costat2.length === 9 && retoperro === true){
                 ganar()
             }
 
@@ -136,6 +143,7 @@ function comprobar_cosas() {
     let test_malote = false
     let test_padre = false
     let test_madre = false
+    let test_perro = false
 
     if (barca.includes('padre') || barca.includes('madre') || barca.includes('policia')) {
     //     Aqui irá la logica 'malote'
@@ -210,13 +218,34 @@ function comprobar_cosas() {
             }
         }
 
-        if(costat1.includes('bebe')) {
+        // Aqui irá la logica 'perro'
 
+        if(retoperro) {
+            if (costat1.includes(perro)) {
+                if (costat1.includes('madre') || costat1.includes('padre') || costat1.includes('policia')) {
+                    test_perro = true
+                }else if(costat1.length === 1){
+                    test_perro = true
+                }
+            } else if (costat2.includes(perro)) {
+                if (costat2.includes('policia') || costat2.includes('padre') || costat2.includes('madre')) {
+                    test_perro = true
+                }else if(costat2.length === 1){
+                    test_perro = true
+                }
+            } else if (barca.includes(perro)) {
+                if(barca.includes('policia') || barca.includes('padre') || barca.includes('madre')) {
+                    test_perro = true
+                }
+            }
+
+
+        }else{
+            test_perro = true
         }
 
-
     //     Comprobar tests
-        if(test_malote && test_padre && test_madre){
+        if(test_malote && test_padre && test_madre && test_perro){
             return true
         }
 
@@ -284,19 +313,36 @@ function dibujar(){
 }
 
 function ganar(){
-    alert('HAS GANADO')
-    let cositas = costat2.splice(0, costat2.length);
-    botonreto.hidden = true;
-    costat1.push(cositas)
-    console.log(costat1)
+    fade()
+    setTimeout(() => {
+        for (let i= 0; i<costat2.length; i++) {
+            costat1.push(costat2[i]);
+        }
+        costat2.splice(0,costat2.length)
+
+        ir_hacia_la_derecha = true;
+        const boto = document.getElementById("btn-creuar");
+        boto.style.alignSelf = "flex-start";
+        boto.innerHTML = "<img src='imagenes/barco_noob_izq.png' width='100px'>";
+        dibujar()
+    }, 1000)
+    
 }
 
 
 function reto(){
-    retobebe = true
-    costat1.push('bebe')
-    botonreto.hidden = true;
-    bebe.innertext = 'El bebé ';
+    if(victorias === 1){
+        retoperro = true
+        costat1.push(perro)
+        reglas_reto.innerHTML = '<ul>\n' +
+            '    <li>Máximo 2 personas en la barca.</li>\n' +
+            '    <li>Solo pueden conducir el policia, el padre y la madre</li>\n' +
+            '    <li>El ladrón no puede estar con los familiares si no está el policia</li>\n' +
+            '    <li>El padre no puede estar solo con las hijas sin la madre</li>\n' +
+            '    <li>la madre no puede estar sola con los hijos sin el padre</li>\n' +
+            '    <li>El perro necesita no puede quedarse a solas con los niños ni el ladrón</li>\n' +
+            '  </ul>'
+    }
     dibujar()
 }
 
@@ -304,5 +350,14 @@ function reto(){
 actualitzarInterficie();
 
 function fade(){
+    victorias++
+    cantidadvictorias.innerHTML = '<h3>Victorias: ' + victorias + '</h3>'
     modal.style.display = "block";
+}
+
+function nuevo_reto(){
+
+    reto()
+    modal.style.display = "none";
+    dibujar()
 }
