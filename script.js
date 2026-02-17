@@ -1,11 +1,20 @@
-// TODO Enfadar a la consola , final , añadir easter egg/dificultad
+
+// Los personajes iniciales
+
 const costat1 = ["malote" , "policia", "madre", "padre", "hijo1", "hijo2", "hija1", "hija2"];
 const barca = [];
 const costat2 = [];
 
+// Posibles perros
+
 const perros = ['him', 'snoopdog', 'perroemo', 'sideeye', 'perropanzon']
+
+// La elección del perro aleatorio
+
 let perroaleatorio= Math.trunc(Math.random() * 5)
 perro = perros[perroaleatorio]
+
+// Las constantes para tomar los elementos necesarios
 
 const botonreto= document.getElementById('btn-reto')
 const foxy = document.getElementById('foxy');
@@ -15,13 +24,21 @@ const contenidorC2 = document.getElementById("personatges-c2");
 const reglas_reto = document.getElementById("regles");
 const modal = document.getElementById("myModal");
 const cantidadvictorias = document.getElementById("victorias");
+
+// Para poner el botón para añadir un nuevo personaje, empieza sin aparecer, aparecerá solo cuando ganas
+
 botonreto.hidden = true;
+
+// Las lets para contar las victorias, contador y para moverse de izquierda a derecha (si está en true)
+
 let retoperro= false
 
 let victorias = 0
 
 let contador= 0
 let ir_hacia_la_derecha = true
+
+// Actualizar y colocar personajes iniciales
 
 function actualitzarInterficie() {
     // Netejar el contenidor abans de tornar a dibuixar
@@ -47,6 +64,8 @@ function actualitzarInterficie() {
     });
 }
 
+// Mover el barco (y su imagen) de un lado a otro
+
 function barco_añadir(element){
     if(contador < 2) {
         let index = ""
@@ -66,6 +85,7 @@ function barco_añadir(element){
 
         }
 
+        // El jumpscare aleatorio si excedes la capacidad de la barca
 
         dibujar()
     }else{
@@ -85,6 +105,8 @@ function barco_añadir(element){
     }
 }
 
+// Eliminar y añadir el nombre al array del costado para bajar de la barca
+
 function bajar(element){
     let index = barca.indexOf(element);
 
@@ -99,6 +121,8 @@ function bajar(element){
     }
     dibujar()
 }
+
+// Ayuda a elegir y cambiar la dirección de la barca y para comprobar el numero para ganar o el alert por si no se puede cruzar
 
 function cruzar(){
     const boto = document.getElementById("btn-creuar");
@@ -134,9 +158,11 @@ function cruzar(){
         }
     }
     else{
-        alert('no puede cruzar')
+        alert('No se puede cruzar')
     }
 }
+
+// Función para comprobar la lógica de los personajes principales
 
 function comprobar_cosas() {
 
@@ -185,7 +211,6 @@ function comprobar_cosas() {
         }else if(barca.includes('padre')) {
             if (barca.includes('hija1') || barca.includes('hija2')) {
                 test_padre = false
-                alert('Están las hijas en la barca')
             }else{
                 test_padre = true
             }
@@ -212,7 +237,6 @@ function comprobar_cosas() {
         }else if(barca.includes('madre')) {
             if (barca.includes('hijo1') || barca.includes('hijo2')) {
                 test_madre = false
-                alert('Están los hijos en la barca')
             }else{
                 test_madre = true
             }
@@ -252,6 +276,8 @@ function comprobar_cosas() {
     }
 }
 
+// Función para dibujar todos los personajes en su zona establecida o movida
+
 function dibujar(){
     contenidorC1.innerHTML = "";
     contenidorB.innerHTML = "";
@@ -262,8 +288,6 @@ function dibujar(){
         boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
 
         boto.addEventListener("click", () => {
-            // Exemple de lògica: passar del costat 1 a la barca
-
 
             bajar(element)
 
@@ -283,8 +307,6 @@ function dibujar(){
         }
 
         boto.addEventListener("click", () => {
-            // Exemple de lògica: passar del costat 1 a la barca
-
 
             barco_añadir(element)
 
@@ -312,6 +334,8 @@ function dibujar(){
     });
 }
 
+// Función que se utiliza para ganar, pasar todos los personajes del costado 2 al 1, resetear el contador y mover la barca
+
 function ganar(){
     fade()
     setTimeout(() => {
@@ -329,6 +353,7 @@ function ganar(){
     
 }
 
+// Función que añade al nuevo personaje y actualiza las normas para saber qué hace el nuevo personaje
 
 function reto(){
     if(victorias === 1){
@@ -340,13 +365,13 @@ function reto(){
             '    <li>El ladrón no puede estar con los familiares si no está el policia</li>\n' +
             '    <li>El padre no puede estar solo con las hijas sin la madre</li>\n' +
             '    <li>la madre no puede estar sola con los hijos sin el padre</li>\n' +
-            '    <li>El perro necesita no puede quedarse a solas con los niños ni el ladrón</li>\n' +
+            '    <li>El perro no puede quedarse a solas con los niños ni el ladrón</li>\n' +
             '  </ul>'
     }
     dibujar()
 }
 
-// Inicialitzem la vista
+// Inicializa la vista
 actualitzarInterficie();
 
 function fade(){
@@ -354,6 +379,8 @@ function fade(){
     cantidadvictorias.innerHTML = '<h3>Victorias: ' + victorias + '</h3>'
     modal.style.display = "block";
 }
+
+//Activa y quita el fondo en negro para empezar de nuevo
 
 function nuevo_reto(){
 
