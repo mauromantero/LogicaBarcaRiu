@@ -46,7 +46,7 @@ function actualitzarInterficie() {
 
     costat1.forEach(element => {
         const boto = document.createElement("button");
-        boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
+        boto.innerHTML = "<img src=imagenes/"+element+".png width='100px' height='100px'>";
         if (ir_hacia_la_derecha) {
 
             ir_hacia_la_derecha = false
@@ -285,7 +285,7 @@ function dibujar(){
 
     barca.forEach(element => {
         const boto = document.createElement("button");
-        boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
+        boto.innerHTML = "<img src=imagenes/"+element+".png width='100px' height='100px'>";
 
         boto.addEventListener("click", () => {
 
@@ -298,7 +298,7 @@ function dibujar(){
 
     costat1.forEach(element => {
         const boto = document.createElement("button");
-        boto.innerHTML = "<img src=/imagenes/"+element+".png width='100px' height='100px'>";
+        boto.innerHTML = "<img src=imagenes/"+element+".png width='100px' height='100px'>";
 
         if(ir_hacia_la_derecha) {
             boto.disabled = false
@@ -317,7 +317,7 @@ function dibujar(){
 
     costat2.forEach(element => {
         const boto = document.createElement("button");
-        boto.innerHTML = "<img src=/imagenes/" + element + ".png width='100px' height='100px'>";
+        boto.innerHTML = "<img src=imagenes/" + element + ".png width='100px' height='100px'>";
 
         if(ir_hacia_la_derecha) {
             boto.disabled = true
